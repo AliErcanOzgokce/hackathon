@@ -8,16 +8,20 @@ contract InfPool {
 
     struct LstInfo {
         bytes name;
-        bytes totalSupply;
         bytes symbol;
+        uint256 totalSupply;
+        uint256 inputFee;
+        uint256 outputFee;
     }
 
     // EVENTS
     event AddLst(
         address indexed lst,
         bytes name,
-        bytes totalSupply,
-        bytes symbol
+        bytes symbol,
+        uint256 totalSupply,
+        uint256 inputFee,
+        uint256 outputFee
     );
 
     // MODIFIERS
@@ -31,12 +35,32 @@ contract InfPool {
     }
 
     // FUNCTIONS
-    function addLst(
+    function registerLst(
         address _lst,
         bytes memory _name,
-        bytes memory _totalSupply,
-        bytes memory _symbol
+        bytes memory _symbol,
+        uint256 _totalSupply
     ) public onlyOwner {
-        lsts[_lst] = LstInfo(_name, _totalSupply, _symbol);
+        lsts[_lst] = LstInfo(_name, _symbol, _totalSupply, 0, 0);
+    }
+
+    function addLiquidity(address lstAddress) public payable {
+        // TODO
+    }
+
+    function removeLiquidity(address lstAddress) public payable {
+        // TODO
+    }
+
+    function calculateFees(address lstAddress) public {
+        // TODO
+    }
+
+    function swap(address fromLstAddress, address toLstAddress, uint256 amount) public {
+        // TODO
+    }
+
+    function _transfer(address fromLstAddress, address toLstAddress, uint256 amount) internal {
+        // TODO
     }
 }
